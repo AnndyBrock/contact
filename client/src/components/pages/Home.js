@@ -1,11 +1,17 @@
 import React, {Fragment} from 'react';
-
+import Contact from '../contacts/Contacts'
+import ContactForm from '../contacts/ContactForm';
 
 const Home = () =>
     (
-        <Fragment>
-           My app
-        </Fragment>
+        <div className='grid-2'>
+            <div>
+               <ContactForm/>
+            </div>
+            <div>
+                <Contact/>
+            </div>
+        </div>
     );
 
 

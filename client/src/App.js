@@ -5,7 +5,7 @@ import About from './components/pages/About';
 import Navbar from './components/layout/Navbar';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
-import ContactState from '../src/components/context/contact/ContactState';
+import ContactState from './context/contact/ContactState';
 
 const App = () => {
   return(
