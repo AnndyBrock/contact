@@ -5,6 +5,9 @@ const ContactForm = () =>{
 
     const contactContext = useContext(ContactContext);
 
+    const {addContact, current} = contactContext;
+
+
     const [contact, setContact] = useState({
         name:'',
         email:'',
@@ -20,7 +23,7 @@ const ContactForm = () =>{
 
     const onSubmit = e => {
         e.preventDefault();
-        contactContext.addContact(contact);
+        addContact(contact);
         setContact({
             name:'',
             email:'',
@@ -28,7 +31,6 @@ const ContactForm = () =>{
             type:'personal'
         });
     };
-
 
     return (
        <form onSubmit={onSubmit}>
