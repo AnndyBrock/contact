@@ -5,11 +5,15 @@ import ContctFilter from "../contacts/ContactFilter";
 import AuthContext from '../../context/auth/authContext';
 
 
-const Home = () =>{
+const Home = (props) =>{
     const authContext = useContext(AuthContext);
 
     useEffect(()=>{
+        if (!authContext.isAuth) {
+            props.history.push('/login')
+        }
         authContext.loadUser()
+
         // eslint-disable-next-line
     },[]);
     return (
