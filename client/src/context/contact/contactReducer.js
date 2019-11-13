@@ -1,5 +1,12 @@
 import {
-    ADD_CONTACT, CLEAR_CURRENT, CLEAR_FILTER, DELETE_CONTACT, FILTER_CONTACTS, SET_CURRENT, UPDATE_CONTACT
+    ADD_CONTACT,
+    CLEAR_CURRENT,
+    CLEAR_FILTER,
+    CONTACT_ERROR,
+    DELETE_CONTACT,
+    FILTER_CONTACTS,
+    SET_CURRENT,
+    UPDATE_CONTACT
 } from '../types'
 
 export default (state, action)=>{
@@ -41,6 +48,11 @@ export default (state, action)=>{
                     const regex = new RegExp(`${action.payload}`, 'gi');
                     return contact.name.match(regex) || contact.email.match(regex) || contact.phone.match(regex)
                 })
+            };
+        case CONTACT_ERROR:
+            return {
+                ...state,
+                error:action.payload
             };
         default:
             return state;
