@@ -9,9 +9,6 @@ const Home = (props) =>{
     const authContext = useContext(AuthContext);
 
     useEffect(()=>{
-        if (!authContext.isAuth) {
-            props.history.push('/login')
-        }
         authContext.loadUser()
 
         // eslint-disable-next-line

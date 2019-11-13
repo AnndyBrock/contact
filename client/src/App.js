@@ -6,6 +6,8 @@ import Navbar from './components/layout/Navbar';
 import Alert from './components/layout/Alerts';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
+import PrivateRoute from './components/routing/PrivateRoute';
+
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 import setAuthToken from './utils/setAuthToken';
@@ -25,10 +27,10 @@ const App = () => {
                   <Router>
                       <Fragment>
                           <Navbar/>
-                          <div className="container">
+                          <div className="conta iner">
                               <Alert alert={alert}/>
                               <Switch>
-                                  <Route exact path='/' component={Home}/>
+                                  <PrivateRoute exact path='/' component={Home}/>
                                   <Route exact path='/about' component={About}/>
                                   <Route exact path='/register' component={Register}/>
                                   <Route exact path='/login' component={Login}/>

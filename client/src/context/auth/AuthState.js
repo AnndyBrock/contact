@@ -89,7 +89,8 @@ const AuthState = props => {
         }
     };
     //LogOut
-    const logOutUSer = ()=>{
+    const logOutUSer = async () => {
+        dispatch({type:LOGOUT})
     };
 
     //ClearErrors
