@@ -3,6 +3,8 @@ import axios from 'axios';
 import ContactContext from './contactContext';
 import ContactReducer from './contactReducer';
 import {
+    GET_CONTACTS,
+    CLEAR_CONTACTS,
     ADD_CONTACT,
     DELETE_CONTACT,
     SET_CURRENT,
@@ -16,13 +18,24 @@ import {
 
 const ContactState = props => {
     const initialState = {
-        contacts: [],
+        contacts: null,
         current:null,
         filtered:null,
         error:null
     };
 
     const [state, dispatch] = useReducer(ContactReducer, initialState);
+
+    //Get Contacts
+    const getContacts = async () => {
+        try {
+            const res = await axios.get('/api/contacts');
+            dispatch({ type: GET_CONTACTS, payload: res.data});
+        } catch (e) {
+            dispatch({ type: CONTACT_ERROR, payload: e.response.msg});
+        }
+
+    };
 
     // Add Contact
     const addContact = async contact => {
@@ -40,8 +53,17 @@ const ContactState = props => {
 
     };
     // Delete Contact
-    const deleteContact = (id)=> {
-        dispatch({ type: DELETE_CONTACT, payload: id})
+    const deleteContact = async (id)=> {
+        try {
+            await axios.delete(`/api/contacts/${id}`);
+            dispatch({ type: DELETE_CONTACT, payload: id})
+        }catch (e) {
+            dispatch({ type: CONTACT_ERROR, payload: e.response.msg});
+        }
+    };
+    //Clear contacts
+    const clearContacts = ()=> {
+        dispatch({ type: CLEAR_CONTACTS })
     };
     // Set Current Contact
     const setCurrent = ( contact )=> {
@@ -70,6 +92,7 @@ const ContactState = props => {
                 current:state.current,
                 filtered:state.filtered,
                 error:state.error,
+                getContacts,
                 addContact,
                 deleteContact,
                 setCurrent,
@@ -77,7 +100,7 @@ const ContactState = props => {
                 updateCurrent,
                 filterContacts,
                 clearFilter,
-
+                clearContacts
             }}
         >
             {props.children}
